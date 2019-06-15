@@ -1,13 +1,14 @@
 # Site settings
 # title: Butane Jekyll Theme
-description: >
-    Batyr Nuryyev
-author: Batyr Nuryyev
+#description: >
+#    Batyr's Notes
+author: oneturkmen
 email: youemail@gmail.com
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://oneturkmen.github.io" # the base hostname & protocol for your site
 twitter_username: oneturkmen
 github_username:  oneturkmen
+linkedin_username: nuryyev
 
 # Build settings
 include: [_pages]

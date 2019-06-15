@@ -3,11 +3,11 @@
    ========================================================================== */
 
 .c-article {
-    margin-bottom: 10rem; // 100px
+    margin-bottom: 6rem; // 60px
 }
 
 .c-article__header {
-    margin-bottom: 5rem; // 50px
+    margin-bottom: 4rem; // 40px
     @media screen and (min-width: $bp__sm) {
         display: -webkit-box;
         display: -webkit-flex;
