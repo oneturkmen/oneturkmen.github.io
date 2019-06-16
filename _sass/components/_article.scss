@@ -30,6 +30,7 @@
 .c-article__title {
     @include fs--heading-1;
     color: $c-base__02;
+    font-weight: 400;
 }
 
 .c-article__time {
@@ -40,7 +41,8 @@
 .c-article__main {
     margin-bottom: 5rem; // 50px
     @include fs--body;
-    color: $c-base__01;
+    // color: $c-base__01;
+    color: $c-base__02;
 
     > * {
         margin-bottom: 1.8rem; // 18px
@@ -62,10 +64,10 @@
         @include fs--body;
     }
 
-    strong {
-        color: $c-base__02;
-        font-weight: 400;
-    }
+    //strong {
+    //   color: $c-base__02;
+    //    font-weight: 400;
+    //}
 
     blockquote {
         margin-left: 0;

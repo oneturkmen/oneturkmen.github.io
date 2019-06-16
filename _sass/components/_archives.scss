@@ -7,12 +7,14 @@
 }
 
 .c-archives__year {
-    margin-bottom: 2.5rem;
-    @include fs--heading-1;
+    // margin-bottom: 2.5rem;
+    // TODO @include fs--heading-1;
+    line-height: 1.5;
+    font-size: 2.5rem;
 }
 
 .c-archives__list {
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.5rem;
     list-style: none;
 }
 
@@ -40,6 +42,7 @@
 
     h3 {
         @include fs--body;
+        font-weight: 400;
     }
 
     p {

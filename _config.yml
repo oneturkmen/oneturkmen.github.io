@@ -11,7 +11,7 @@ github_username:  oneturkmen
 linkedin_username: nuryyev
 
 # Build settings
-include: [_pages]
+include: [_pages, _assets]
 markdown: kramdown
 permalink: /:year/:month/:title
 sass:
