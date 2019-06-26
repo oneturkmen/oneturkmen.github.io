@@ -1,3 +1,18 @@
-<footer class="c-page__footer">
-    <p>Follow: {% if site.twitter_username %}<a href="https://twitter.com/{{ site.twitter_username }}">Twitter</a><span class="u-separate"></span>{% endif %}{% if site.github_username %}<a href="https://github.com/{{ site.github_username }}">Github</a><span class="u-separate"></span>{% endif %}{% if site.linkedin_username %}<a href="https://linkedin.com/in/{{ site.linkedin_username }}">LinkedIn</a>{% endif %}</p>
+<footer class="c-page__footer"> 
+    <p>{% if site.twitter_username %}
+        <a href="https://twitter.com/{{ site.twitter_username }}" class="fa fa-twitter" style="margin: 3px; padding: 3px; font-size: 1.5em;">
+            <!--Twitter-->
+        </a>
+        <span class="u-separate"></span>
+        {% endif %}{% if site.github_username %}
+        <a href="https://github.com/{{ site.github_username}}" class="fa fa-github" style="margin: 3px; padding: 3px; font-size: 1.5em;">
+            <!--Github-->
+        </a>
+        <span class="u-separate"></span>
+        {% endif %}{% if site.linkedin_username %}
+        <a href="https://linkedin.com/in/{{ site.linkedin_username }}" class="fa fa-linkedin" style="margin: 3px; padding: 3px; font-size: 1.5em;">
+            <!--LinkedIn-->
+        </a>
+        {% endif %}
+    </p>
 </footer>

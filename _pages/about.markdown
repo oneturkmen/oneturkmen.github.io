@@ -3,13 +3,25 @@ layout: content
 title: About
 permalink: /about/
 ---
-My name is Batyr and I am incoming graduate CS student to the University of Alberta, Edmonton.
 
-My interests (not only research) include:
+Hello there! I am Batyr, an incoming graduate student to the 
+[<span style="color: #007c41;">University of Alberta</span>](https://www.ualberta.ca).
 
-- Systems programming (with Rust and C++)
-- Machine learning and evolutionary algorithms (applied for NP problems like SAT and TSP)
-- Functional programming and category theory (not just monads)
-- Green tea, and oatmeal for breakfast.
+Tech interests include:
 
-Projects are open-sourced on Github (link below).
+- *Systems programming and software engineering*.
+- *Machine learning (ML) and evolutionary algorithms*.
+- *Functional programming (FP) and applied category theory*.
+
+Technologies used (*Related:* check out [`/projects`](https://oneturkmen.github.io/projects/)):
+
+- *Systems.* C++ and Rust.
+- *ML.* Python with `numpy`, `matplotlib`, `sklearn`, `keras`, and jupyter notebooks.
+- *FP*. Haskell. (as a pure FP language, not as partially applied paradigm).
+- *Web stuff*. Node.js, Twitter Bootstrap.
+- *Databases*. MongoDB, PostgreSQL.
+- *Infrastructure*. Docker, GitLab, Heroku.
+
+**P.S.** The website is still in an *experimental* state; you may see things being changed next time you visit.
+
+<span style="color: #800000">Got feedback?</span> Let me know at `oneturkmen [at] gmail [dot] com`.
