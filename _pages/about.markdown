@@ -13,14 +13,15 @@ Tech interests include:
 - *Machine learning (ML) and evolutionary algorithms*.
 - *Functional programming (FP) and applied category theory*.
 
-Technologies used (*Related:* check out [`/projects`](https://oneturkmen.github.io/projects/)):
+Technologies used (check out [`/projects`](https://oneturkmen.github.io/projects/) as well):
 
 - *Systems.* C++ and Rust.
-- *ML.* Python with `numpy`, `matplotlib`, `sklearn`, `keras`, and jupyter notebooks.
+- *ML.* Python with `numpy`, `matplotlib`, `sklearn`, `keras`, and `jupyter` notebooks.
 - *FP*. Haskell. (as a pure FP language, not as partially applied paradigm).
 - *Web stuff*. Node.js, Twitter Bootstrap.
 - *Databases*. MongoDB, PostgreSQL.
 - *Infrastructure*. Docker, GitLab, Heroku.
+- *Miscellaneous*. LaTeX (math), Java (OOP university course).
 
 **P.S.** The website is still in an *experimental* state; you may see things being changed next time you visit.
 
