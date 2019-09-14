@@ -4,9 +4,9 @@ title: Projects
 permalink: /projects/
 ---
 
-The following projects are the ones I participated in or developed within past 2 years.
+The following projects are the ones I participated in or developed within past 2-3 years.
 
-<span style="color: red;">NOTE 1:</span> No work-related projects. 
+<span style="color: red;">NOTE 1:</span> No work-related projects.
 You can see a short description of those on my LinkedIn profile (for now).
 
 <span style="color: red;">NOTE 2:</span> This is a work-in-progress page. I hope to make this page look a bit better soon.
@@ -19,7 +19,7 @@ Compared with an algorithm for evolving fixed topology network. Used *numpy*, *m
 
 ### Fake News Generator (2018)
 
-Final project for machine learning class at the U of Wyoming. Used Markov chains and long short-term memory (LSTM) networks 
+Final project for machine learning class at the U of Wyoming. Used Markov chains and long short-term memory (LSTM) networks
 for text generation. Compared both in terms of quality of the generated text. Wrote algorithms in *Python* and a small report in *LaTeX*.
 
 ### Blog for Ultimate Frisbee players (2017)
@@ -41,5 +41,3 @@ Part of CS coursework done at the U of Wyoming. Used *C++* (*Flex* and *Bison*).
 
 Tiny *Haskell* implementation of the "Composing Fractals" paper by Mark P. Jones. Generates fractals using
 ASCII characters as well as OpenGL (GLUT).
-
-
