@@ -5,18 +5,19 @@ permalink: /about/
 ---
 
 Hello there! My name is Batyr and I am a graduate student at the 
-[<span style="color: #007c41;">University of Alberta</span>](https://www.ualberta.ca).
-I obtained my Bachelor's degree (with CS as major and Math as minor) from the
-[<span style="color: #0d335f;">American University in
+[<span style="color: #007c41;">University of Alberta</span>](https://www.ualberta.ca),
+where I am doing research at the 
+[<span style="color: #DAA520;">Software Maintenance and Reuse Lab</span>](https://sarahnadi.org/smr/).
+Prior to that, I obtained my Bachelor's degree (with CS as major and Math as minor) from the [<span style="color: #0d335f;">American University in
 Bulgaria</span>](https://www.aubg.edu/).
 
-I am doing research in the intersection of software engineering (SE) and compilers.
-My goal is to apply methods and techniques of the former to increase variability and reuse of the latter.
+My research is in the area of software engineering (SE) and compilers. My goal is to 
+apply methods and techniques of the former to increase variability and reuse of the latter.
 
-In general, my tech interests include:
+My tech interests include:
 
-- *Systems software engineering, static analysis, compiler theory*.
-- *Scalable machine learning, evolutionary algorithms*.
+- *Systems software engineering, particularly compilers*.
+- *Machine learning, evolutionary algorithms*.
 
 Technologies used (check out [`/projects`](https://oneturkmen.github.io/projects/) as well):
 

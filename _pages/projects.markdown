@@ -4,7 +4,7 @@ title: Projects
 permalink: /projects/
 ---
 
-The following projects are the ones I participated in or developed within past 2-3 years.
+The following projects are the ones I participated in or developed within the past few years.
 
 <span style="color: red;">NOTE 1:</span> No work-related projects.
 You can see a short description of those on my LinkedIn profile (for now).
