@@ -23,7 +23,7 @@ In the past, I have worked with a variety of tools and languages such as:
 - *Web stuff*. Node.js, Twitter Bootstrap.
 - *Databases*. MongoDB, PostgreSQL.
 - *Infrastructure*. Docker, GitLab, Heroku.
-- *Miscellaneous*. LaTeX, Java, Haskell, Bash (scripting).
+- *Miscellaneous*. LaTeX, Java, Haskell, Bash/shell.
 
 **P.S.** The website is still in an *experimental* state; you may see things being changed next time you visit.
 
