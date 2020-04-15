@@ -11,7 +11,7 @@ where I am doing research at the
 Prior to that, I obtained my BA in Computer Science from [<span style="color: #0d335f;">the American University in
 Bulgaria</span>](https://www.aubg.edu/).
 
-My focuses on software engineering tools and techniques for increasing software
+My research focuses on software engineering tools and techniques for increasing software
 variability and reuse (e.g., software product lines, variability implementation
 strategies). I am also interested in program analysis tools, their
 applications, capabilities and drawbacks.
