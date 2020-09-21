@@ -21,15 +21,38 @@ library).
 and run a few commands to install a library as dependency.
 - *Reuse*. No need to write that sorting algorithm, networking protocols,
 assembly instructions, etc. from scratch!
-- etc.
 
 Despite the numerous benefits, developers may incorrectly use such library and
 framework APIs. Such incorrect usage, known as *API misuses*, can lead to bugs
 that may not be detectable when you write, and only when you actually deploy
-your application and it crashes at some point (for tech people: mistakes cannot
-be determined at compile time due to the halting problem). My research is
+your application and it crashes at some point. My research is
 therefore striving to help developers detect and prevent these bugs before
 compiling the code.
+
+Take a look at the following example of a classical misuse of Java Iterator API:
+
+```java
+public String getHeadName(ArrayList<String> names) {
+    // Use iterator to print the names
+    ListIterator<String> it = names.listIterator();
+
+    // Bad!!!
+    // Misuse! Do not call `next()` without calling `hasNext()`!
+    String name = names.next(); // may throw NoSuchElementException
+
+    // Good
+    String name = "";
+    if (names.hasNext()) {
+        name = names.next();
+    } else {
+        // set default name
+        ...
+    }
+
+    return name;
+}
+```
+
 
 <!--**Other work:** Earlier in my master's degree, I spent some time in the area of
 software variability and reuse (e.g., software product lines, variability
