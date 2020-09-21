@@ -13,7 +13,7 @@ analysis and software engineering.
 frequently reuse existing functionality from other software (such as libraries,
 frameworks). They reuse the functionality through so-called *Application
 Programming Interface* (API), which is an interface between their own code
-and someone else’s already implemented one. These APIs have several benefits:
+and someone else’s already implemented one. These APIs have numerous benefits such as:
 - *Abstraction.* Developers do not need to know the fine implementation details
 to reuse the existing code (i.e., just extend a class or call a function from the
 library).
@@ -21,6 +21,7 @@ library).
 and run a few commands to install a library as dependency.
 - *Reuse*. No need to write that sorting algorithm, networking protocols,
 assembly instructions, etc. from scratch!
+- etc.
 
 Despite the numerous benefits, developers may incorrectly use such library and
 framework APIs. Such incorrect usage, known as *API misuses*, can lead to bugs
