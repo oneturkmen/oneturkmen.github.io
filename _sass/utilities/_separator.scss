@@ -3,10 +3,10 @@
    ========================================================================== */
 
 .u-separate {
-    margin-right: .45rem;
-    margin-left: .25rem;
+    margin-right: .75rem;
+    margin-left: .55rem;
     color: $c-base__01;
     &:after {
-        content: '\00a0/';
+        content: ' |';
     }
 }
