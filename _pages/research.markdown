@@ -11,8 +11,8 @@ analysis and software engineering.
 
 **Longer description:** Instead of writing code from scratch, developers
 frequently reuse existing functionality from other software (such as libraries,
-frameworks). They reuse the functionality through so-called an *Application
-Programming Interface* (API), which in essence is an interface between their own code
+frameworks). They reuse the functionality through so-called *Application
+Programming Interface* (API), which is an interface between their own code
 and someone else’s already implemented one. These APIs have several benefits:
 - *Abstraction.* Developers do not need to know the fine implementation details
 to reuse the existing code (i.e., just extend a class or call a function from the
