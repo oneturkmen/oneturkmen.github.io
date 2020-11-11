@@ -1,0 +1,16 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+is_imagelink	_site/js/lightbox.js	/^function is_imagelink(url) {$/;"	f
+is_imagelink	js/lightbox.js	/^function is_imagelink(url) {$/;"	f
+is_vimeolink	_site/js/lightbox.js	/^function is_vimeolink(url,el) {$/;"	f
+is_vimeolink	js/lightbox.js	/^function is_vimeolink(url,el) {$/;"	f
+is_youtubelink	_site/js/lightbox.js	/^function is_youtubelink(url) {$/;"	f
+is_youtubelink	js/lightbox.js	/^function is_youtubelink(url) {$/;"	f
+setGallery	_site/js/lightbox.js	/^function setGallery(el) {$/;"	f
+setGallery	js/lightbox.js	/^function setGallery(el) {$/;"	f
+xmlhttp.onreadystatechange	_site/js/lightbox.js	/^    var xmlhttp = new XMLHttpRequest();$/;"	f
+xmlhttp.onreadystatechange	js/lightbox.js	/^    var xmlhttp = new XMLHttpRequest();$/;"	f
