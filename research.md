@@ -1,5 +1,5 @@
 ---
-layout: content
+layout: page
 title: Research
 permalink: /research/
 ---
@@ -31,7 +31,7 @@ compiling the code.
 
 Take a look at the following example of a classical misuse of Java Iterator API:
 
-```java
+{% highlight java %}
 public String getHeadName(ArrayList<String> names) {
     // Use iterator to print the names
     ListIterator<String> it = names.listIterator();
@@ -51,7 +51,7 @@ public String getHeadName(ArrayList<String> names) {
 
     return name;
 }
-```
+{% endhighlight %}
 
 
 <!--**Other work:** Earlier in my master's degree, I spent some time in the area of
@@ -61,5 +61,4 @@ OMR](https://github.com/eclipse/omr) team to help them better understand the
 challenges and constraints in their software, and subsequently [provided
 guidance](https://github.com/eclipse/omr/issues/5276#issue-630075221) on how to
 tackle these problems.-->
-
 
