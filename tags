@@ -4,6 +4,7 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+gtag	_includes/head.html	/^function gtag(){dataLayer.push(arguments);}$/;"	f
 is_imagelink	_site/js/lightbox.js	/^function is_imagelink(url) {$/;"	f
 is_imagelink	js/lightbox.js	/^function is_imagelink(url) {$/;"	f
 is_vimeolink	_site/js/lightbox.js	/^function is_vimeolink(url,el) {$/;"	f
