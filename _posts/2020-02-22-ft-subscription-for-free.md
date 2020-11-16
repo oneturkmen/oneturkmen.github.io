@@ -9,7 +9,7 @@ categories: jekyll update
 You can still access the archived versions though, with the link provided at
 the end of this article. This incident happened back in August 2018.
 
-![ft on medium]({{ site.url }}/_assets/images/ft_medium.png)
+![ft on medium]({{ site.baseurl }}/img/ft_medium.png)
 
 #### Paid Financial Times ... for free
 
@@ -31,7 +31,7 @@ worked; I managed to access the same contents as in `ft.com`.
 What was more exciting is that I could access paid articles **for free**.
 In other words, one could read all articles, paid or not, without any subscription whatsoever.
 
-![reporting the issue]({{ site.url }}/_assets/images/ft_bypass.png)
+![reporting the issue]({{ site.baseurl }}/img/ft_bypass.png)
 
 Being not sure how serious this issue is, I nevertheless hoped to get some
 bounty for finding out a "backdoor" that let anyone read paid articles for free
