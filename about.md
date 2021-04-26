@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-<img class="col one right" style="box-shadow: 0 0 5px #828282; padding: 0px; margin-right: 35px; float: left;" src="/img/prof_pic.jpg">
+<img class="col one right" style="box-shadow: 0 0 5px #828282; padding: 0px; margin-right: 35px; float: left;" src="/img/prof_pic.png">
 
 
 Hello there! My name is Batyr and I am a graduate student at the
