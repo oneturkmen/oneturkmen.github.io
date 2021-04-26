@@ -1,0 +1,5 @@
+---
+layout: none
+---
+User-agent: Googlebot-Image
+Disallow: /img/prof_pic.png
