@@ -2,7 +2,7 @@
 layout: post
 title: "Reading *paid* Financial Times articles for free"
 date: 2020-02-22 17:34:14 -0700
-categories: jekyll update
+categories: tech 
 ---
 
 **Note:** FT disabled the app so you cannot read the news for free anymore.
