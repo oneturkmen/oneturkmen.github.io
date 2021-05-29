@@ -2,7 +2,7 @@
 layout: post
 title:  "Debugging Node.js app with Docker and VSCode"
 date:   2018-08-22 12:00:00 -0500
-categories: jekyll update
+categories: tech
 ---
 
 #### Prerequisites
