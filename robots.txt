@@ -1,5 +1,7 @@
 ---
-layout: none
+permalink: /robots.txt
 ---
-User-agent: Googlebot-Image
-Disallow: /img/prof_pic.png
+User-agent: *
+Disallow:
+
+Sitemap: {{ site.baseurl | prepend: site.url }}/sitemap.xml
