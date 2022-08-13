@@ -3,9 +3,9 @@ layout: about
 title: about
 permalink: /
 
-profile:
-  align: right
-  image: profile_pic.png
+#profile:
+#  align: right
+#  image: profile_pic.png
 
 social: true  # includes social icons at the bottom of the page
 ---
