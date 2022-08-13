@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://batyr.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://batyr.dev/" rel="alternate" type="text/html" hreflang="en" /><updated>2022-08-12T23:58:04-04:00</updated><id>https://batyr.dev/feed.xml</id><title type="html">blank</title><subtitle>A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
+</subtitle><entry><title type="html">Reading *paid* Financial Times articles for free</title><link href="https://batyr.dev/blog/2020/ft-subscription-for-free/" rel="alternate" type="text/html" title="Reading *paid* Financial Times articles for free" /><published>2020-02-22T19:34:14-05:00</published><updated>2020-02-22T19:34:14-05:00</updated><id>https://batyr.dev/blog/2020/ft-subscription-for-free</id><content type="html" xml:base="https://batyr.dev/blog/2020/ft-subscription-for-free/"><![CDATA[<p><strong>Note:</strong> FT disabled the app so you cannot read the news for free anymore.
+You can still access the archived versions though, with the link provided at
+the end of this article. This incident happened back in August 2018.</p>
+
+<figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="/assets/img/ft_medium-480.webp" />
+    <source media="(max-width: 800px)" srcset="/assets/img/ft_medium-800.webp" />
+    <source media="(max-width: 1400px)" srcset="/assets/img/ft_medium-1400.webp" />
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="/assets/img/ft_medium.png" />
+
+  </picture>
+
+</figure>
+
+<h4 id="paid-financial-times--for-free">Paid Financial Times … for free</h4>
+
+<p>I once stumbled upon an article from Financial Times, an online newspaper
+with emphasis on business and economic news.</p>
+
+<p><a href="https://medium.com/ft-product-technology/making-a-request-to-the-financial-times-b2119a2f422d">The article</a>,
+named <em>What happens when you visit FT.com?</em>, describes what happens in the background
+when one makes a request to <a href="https://www.ft.com">ft.com</a>. Besides many interesting
+technical details, I noted that FT used <a href="https://www.heroku.com">Heroku</a> for hosting its services.</p>
+
+<p>If you have ever used Heroku, you know that apps get public <code class="language-plaintext highlighter-rouge">&lt;NAME&gt;.herokuapp.com</code> domain by default.
+For example, say I register a Heroku app and name it <strong>apple</strong>. When I deploy my <strong>apple</strong> app (e.g.,
+a RESTful web server), I will be able to access it on <code class="language-plaintext highlighter-rouge">https://apple.herokuapp.com</code>.</p>
+
+<p>The moment I saw a word <em>Heroku</em> in their article, I wondered if I could randomly
+guess any of their services’ URL. Out of curiosity, I tried a few. Surprisingly, one of the URLs (namely, <code class="language-plaintext highlighter-rouge">financialtimes.herokuapp.com</code>)
+worked; I managed to access the same contents as in <code class="language-plaintext highlighter-rouge">ft.com</code>.
+What was more exciting is that I could access paid articles <strong>for free</strong>.
+In other words, one could read all articles, paid or not, without any subscription whatsoever.</p>
+
+<figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="/assets/img/ft_bypass-480.webp" />
+    <source media="(max-width: 800px)" srcset="/assets/img/ft_bypass-800.webp" />
+    <source media="(max-width: 1400px)" srcset="/assets/img/ft_bypass-1400.webp" />
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="/assets/img/ft_bypass.png" />
+
+  </picture>
+
+</figure>
+
+<p>Being not sure how serious this issue is, I nevertheless hoped to get some
+bounty for finding out a “backdoor” that let anyone read paid articles for free
+(in other words, authorization could be bypassed). After reporting the issue,
+even though I got nothing back (*sigh*), the URL link now does not render any FT
+content and the issue seem to be resolved.</p>
+
+<p>It may have happened that one or more engineering staff members forgot to remove that app. Who knows,
+maybe it was used for testing (e.g., black-box system testing) or something else.</p>
+
+<p><strong>P.S.</strong> You can access archived versions of the website from 2017 <a href="https://web.archive.org/web/20171101000000*/http://financialtimes.herokuapp.com/">at
+archive.org</a>.</p>]]></content><author><name></name></author><category term="tech" /><category term="ft" /><category term="auth-bypass" /><summary type="html"><![CDATA[Learn how you can (or rather, could) read articles on Financial Times for free!]]></summary></entry><entry><title type="html">Debugging Node.js apps with Docker and VS Code</title><link href="https://batyr.dev/blog/2018/debugging-nodejs/" rel="alternate" type="text/html" title="Debugging Node.js apps with Docker and VS Code" /><published>2018-08-22T13:00:00-04:00</published><updated>2018-08-22T13:00:00-04:00</updated><id>https://batyr.dev/blog/2018/debugging-nodejs</id><content type="html" xml:base="https://batyr.dev/blog/2018/debugging-nodejs/"><![CDATA[<h4 id="prerequisites">Prerequisites</h4>
+
+<p>There are some things that should be installed before we get started:</p>
+
+<ul>
+  <li>Docker</li>
+  <li>Node JS</li>
+  <li>Visual Studio Code (a.k.a VS Code)</li>
+</ul>
+
+<h4 id="keywords">Keywords</h4>
+
+<ul>
+  <li><strong>Host</strong> - this is your computer where you are working. In computer networking terms (roughly saying), it is a computer that communicates with other computers.</li>
+  <li><strong>Docker image</strong> - the set of layers/instructions you describe to run (it is more like a sequence, where the order of commands matter).</li>
+  <li><strong>Docker container</strong> - instance of your <strong>image</strong>. Roughly saying, it is like an instance of some “class” (OOP).</li>
+</ul>
+
+<h3 id="getting-started">Getting Started</h3>
+
+<p>Clone this project and let’s get started!</p>
+
+<h3 id="it-all-starts-with-npm-init">It all starts with <em>npm init</em></h3>
+
+<p>Imagine that you are working on a computer where Node.js is not installed. One way to proceed with initialization of your project is to install Node.js locally using your package manager (e.g. apt) and then proceed with <code class="language-plaintext highlighter-rouge">npm init</code>. However, there is a cooler, more portable, and more cross-platform way of doing this; where, no version conflicts occur, no manual explicit configurations are needed to be set up with changing OS environment, etc. In other words, <del>heaven</del> Docker!</p>
+
+<p>Docker is a container management service. The keywords of Docker are <strong>develop</strong>, <strong>ship</strong> and <strong>run</strong> anywhere. The whole idea of Docker is for developers to easily develop applications, ship them into containers which can then be deployed anywhere. What a brilliant and lovely idea for the DevOps workflow.</p>
+
+<p>I assume you have latest Docker installed. Docker uses images (check the definition above) to run containers which are, roughly saying, isolated processes that share the same OS kernel. Note that that Docker containers are <strong>NOT</strong> magical, lightweight VMs! If you are interested how Docker Containers work behind the scenes, take a look at the following <a href="https://www.youtube.com/watch?v=sK5i-N34im8">talk</a> given by Jérôme Petazzoni at DockerCon EU.</p>
+
+<p>Let’s initialize our project by using the latest Node.js image. The following command runs an interactive bash terminal, which lets us access the container with Node.js installed in it, and binds a current directory of the host to the <code class="language-plaintext highlighter-rouge">/app</code> directory in the container, which lets us persist our files (e.g. package.json, etc.).</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker run <span class="nt">-it</span> <span class="nt">-v</span> <span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>:/app node /bin/bash</code></pre></figure>
+
+<p>You will immediately notice that your terminal’s hostname has changed to something like <code class="language-plaintext highlighter-rouge">root@b95028b5a79c:/#</code>. Congrats! Now, you are in a container with Node.js present inside! How cool is that, huh? :)</p>
+
+<p>Now, in order to access our files and initialize the project, open the <code class="language-plaintext highlighter-rouge">/app</code> folder and run <code class="language-plaintext highlighter-rouge">npm init</code>:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd</span> /app     <span class="c"># opens app folder</span>
+npm init    <span class="c"># initialize the Node.js project (creates a package.json)</span></code></pre></figure>
+
+<p>You can also run <code class="language-plaintext highlighter-rouge">ls</code> command to see what’s in the current directory. You will see that you have everything there from the current directory of the host.</p>
+
+<p>Now run <code class="language-plaintext highlighter-rouge">exit</code> to exit from the container. Since you have attached a volume using a <code class="language-plaintext highlighter-rouge">-v</code> option when running a container, your package.json could be seen in your current directory in the host.</p>
+
+<p>Congratulations! So far, you have managed to initialize a Node.js project using Docker (images and running containers) without actually installing Node.js in your computer. It is quite lovely, isn’t it?</p>
+
+<h3 id="dockerfile-and-docker-compose">Dockerfile and docker-compose</h3>
+
+<p>If your app uses MongoDB as a database service, you already have 2 services interacting (i.e. API &lt;-&gt; DB). If you want to dockerize your multi-service application, then you have to define 2 images for those services using Dockerfiles (one per service).</p>
+
+<p>Docker-compose is another Docker tool which lets us manage multi-container applications. With Docker-compose, it is simpler to manage and scale your services. Docker-compose works almost the same way as the <code class="language-plaintext highlighter-rouge">docker</code> command; instead of providing a Dockerfile, you can configure your services by creating the <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> file. Though in a bit different way, you can configure the same way as in a Dockerfile: mounting volumes, running commands, pulling images, etc.</p>
+
+<figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="/assets/img/docker_compose_example-480.webp" />
+    <source media="(max-width: 800px)" srcset="/assets/img/docker_compose_example-800.webp" />
+    <source media="(max-width: 1400px)" srcset="/assets/img/docker_compose_example-1400.webp" />
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="/assets/img/docker_compose_example.png" />
+
+  </picture>
+
+</figure>
+
+<p>For instance, take a look at the image above. We can define a single Dockerfile for the API, and define the configs for Mongo just inside the Compose file. Why don’t we create Dockerfiles for it? Indeed, you could do so and configure your DB (e.g. create users, roles, priviliges, etc. upon initialization). However, in this case, we don’t need to configure anything, we just need the MongoDB service running in the respective container.</p>
+
+<p><strong>NOTE:</strong> We would use Dockerfile for the Node.js API service because we have to <strong>build</strong> the app first, i.e. install its dependencies, transpile (if we use Typescript, etc.). This is how Dockerfile for the Node.js would look like:</p>
+
+<figure class="highlight"><pre><code class="language-dockerfile" data-lang="dockerfile"><span class="c"># use Node.js version latest</span>
+<span class="k">FROM</span><span class="s"> node</span>
+
+<span class="c"># create app folder in the container (not the host)</span>
+<span class="k">RUN </span><span class="nb">mkdir</span> <span class="nt">-p</span> /app
+
+<span class="c"># sets the working directory inside the container (where RUN/CMD commands will be executed)</span>
+<span class="k">WORKDIR</span><span class="s"> /app</span>
+
+<span class="c"># copies package.json from the current directory into the /app folder inside the container</span>
+<span class="k">COPY</span><span class="s"> package.json /app</span>
+
+<span class="c"># runs "npm install" command inside the container</span>
+<span class="k">RUN </span><span class="o">[</span><span class="s2">"npm"</span>, <span class="s2">"install"</span><span class="o">]</span>
+
+<span class="c"># copy the node_modules and the rest of the files into /app</span>
+<span class="k">COPY</span><span class="s"> . /app</span></code></pre></figure>
+
+<p>So, what have we done? We wrote a sequence of instructions which defines your image. We pulled Node (version 9) from the <a href="https://docs.docker.com/docker-hub/repos/">Docker Hub</a>, created a directory <code class="language-plaintext highlighter-rouge">/app</code> inside the container, we “told” Docker to work with the <code class="language-plaintext highlighter-rouge">/app</code> directory, and copied everything (i.e. package.json, src folders, readme, etc.) from the <strong>current folder of the host machine</strong> into the <strong><code class="language-plaintext highlighter-rouge">/app</code> folder in the container</strong>. And, ultimately, we ran the <code class="language-plaintext highlighter-rouge">npm install</code> command inside the container, so we get the dependencies from the package.json installed.</p>
+
+<p>Now, let’s create the <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> file where we will define set the configurations (env variables, volumes, networks, etc.) for the services in our architecture. Here is an example of how to define these:</p>
+
+<figure class="highlight"><pre><code class="language-yml" data-lang="yml"><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3"</span>          <span class="c1"># use version Compose version 3</span>
+<span class="na">services</span><span class="pi">:</span>             <span class="c1"># our services</span>
+  <span class="na">api</span><span class="pi">:</span>
+    <span class="na">build</span><span class="pi">:</span> <span class="s">.</span>          <span class="c1"># use Dockerfile from current directory at build time</span>
+    <span class="na">volumes</span><span class="pi">:</span>          <span class="c1"># volumes are there to let us persist data when containers are exited</span>
+      <span class="pi">-</span> <span class="s">.:/app</span>        <span class="c1"># bind a current directory of the host to the /app directory in the container</span>
+    <span class="na">depends_on</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">database</span>      <span class="c1"># not started until "example-mongo" service is started</span>
+    <span class="na">networks</span><span class="pi">:</span>         <span class="c1"># let's us be discoverable and reachable by other services in the same network</span>
+      <span class="pi">-</span> <span class="s">api-net</span>       <span class="c1"># join "api-net" network</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">3000:3000</span>     <span class="c1"># bind port 3000 on host to port 3000 on container</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="s">npm run start</span>  <span class="c1"># execute the following command when the image is running, e.g. run the Node server</span>
+
+  <span class="na">database</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">mongo</span>      <span class="c1"># if tag is not specified, gets latest image (e.g. MongoDB image)</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">MONGO_INITDB_ROOT_USERNAME=admin</span>      <span class="c1"># set the root username to "admin"</span>
+      <span class="pi">-</span> <span class="s">MONGO_INITDB_ROOT_PASSWORD=admin123</span>   <span class="c1"># set the root password to "admin123"</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./data:/data/db</span>   <span class="c1"># persist data from mongodb</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">api-net</span>       <span class="c1"># makes "database" reachable (via hostname) by other services in the same network</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">27017:27017"</span> <span class="c1"># bind port</span></code></pre></figure>
+
+<p>Note that you could leverage <em>links</em> as well, though I personally love <em>networks</em> because of their simplicity: you can reach other services in the same network just by using their service name (in our case, they are <code class="language-plaintext highlighter-rouge">api</code> or <code class="language-plaintext highlighter-rouge">database</code>). One could also define <code class="language-plaintext highlighter-rouge">working directory</code> inside the compose file (by using <code class="language-plaintext highlighter-rouge">working_dir</code> field) instead of specifying it in the Dockerfile.</p>
+
+<p>For more details on Docker Compose, I would recommend the following <a href="https://docs.docker.com/compose/compose-file/">Compose file Reference</a></p>
+
+<h3 id="typescript-and-nodejs">Typescript and Node.js</h3>
+
+<p>Typescript is a programming language that brings us an optional static type-checking and latest ECMAScript features. By using Typescript, you can leverage the power of OOP, i.e. interfaces, classes, inheritance, polymorphism etc. I would personally recommend to everyone, especially to those who come from the Java/C# side and are just starting out with Javascript. <code class="language-plaintext highlighter-rouge">.ts</code> files are compiled to <code class="language-plaintext highlighter-rouge">.js</code> files, meaning that Typescript is compiled to Javascript. So, in the end, you end up with Javascript anyway :)</p>
+
+<p>In order to get started with Typescript, we have to install <code class="language-plaintext highlighter-rouge">typescript</code> module via npm. We can do this by running our Node container again. Do not forget to attach a volume so the change in package.json is actually saved on our host:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker run <span class="nt">-it</span> <span class="nt">-v</span> <span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>:/app node /bin/bash    <span class="c"># access the Node container</span>
+<span class="nb">cd</span> /app                                         <span class="c"># get into /app folder</span>
+npm <span class="nb">install </span>typescript <span class="nt">--save-dev</span>               <span class="c"># install and save as development dependency</span></code></pre></figure>
+
+<p>At the same time, let’s install <code class="language-plaintext highlighter-rouge">express</code> and the type for it to run the Express server! <strong>Note</strong> that I will not be using MongoDB in this case (though you should experiment and try yourself!).</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">npm <span class="nb">install </span>express <span class="nt">--save</span>
+npm <span class="nb">install</span> @types/express <span class="nt">--save-dev</span>
+<span class="nb">exit</span>        <span class="c"># exit the container</span></code></pre></figure>
+
+<p>As there is already some boilerplate code defined in <code class="language-plaintext highlighter-rouge">src/server.ts</code> file, let’s change the package.json so that we first compile the code from TS to JS, and then run it! <strong>Make sure you are out of the container.</strong></p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"build"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tsc"</span><span class="err">,</span><span class="w">   </span><span class="err">/*</span><span class="w"> </span><span class="err">Transpile</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">JS</span><span class="w">  </span><span class="err">*/</span><span class="w">
+</span><span class="nl">"start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"npm run build &amp;&amp; node ./dist/server.js"</span><span class="w">  </span><span class="err">/*</span><span class="w"> </span><span class="err">Build</span><span class="w"> </span><span class="err">and</span><span class="w"> </span><span class="err">run</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">server</span><span class="w"> </span><span class="err">*/</span></code></pre></figure>
+
+<p>We also need to create a <code class="language-plaintext highlighter-rouge">tsconfig.json</code> file that configures the Typescript compiler. More details on TS compilation configurations, check <a href="https://github.com/Microsoft/TypeScript-Node-Starter#typescript-node-starter">this link</a> out. Here is our example:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+    </span><span class="nl">"compileOnSave"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"compilerOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"outDir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dist"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"module"</span><span class="p">:</span><span class="w"> </span><span class="s2">"commonjs"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"es6"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"noImplicitAny"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"moduleResolution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"sourceMap"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"baseUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"."</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"skipLibCheck"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"paths"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"*"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"node_modules/*"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"/src/types/*"</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="err">//</span><span class="w"> </span><span class="err">includes</span><span class="w"> </span><span class="err">all</span><span class="w"> </span><span class="err">typescript</span><span class="w"> </span><span class="err">files</span><span class="w">
+    </span><span class="nl">"include"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"./src/**/*.ts"</span><span class="p">,</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="err">//</span><span class="w"> </span><span class="err">excludes</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">folder</span><span class="w"> </span><span class="err">containing</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">compiled</span><span class="w"> </span><span class="err">JS</span><span class="w"> </span><span class="err">files</span><span class="w"> 
+    </span><span class="nl">"exclude"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"./dist"</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<p>Now, let’s create a <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> file with which we will run a Node.js server. Here, we will not use a Dockerfile; we will instead configure the API service straight in the Compose yaml file.</p>
+
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3"</span>          <span class="c1"># use version Compose version 3</span>
+<span class="na">services</span><span class="pi">:</span>             <span class="c1"># our services </span>
+  <span class="na">api</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">node</span>       <span class="c1"># use latest node image</span>
+    <span class="na">working_dir</span><span class="pi">:</span> <span class="s">/app</span> <span class="c1"># set the working directory to /app</span>
+    <span class="na">volumes</span><span class="pi">:</span>          <span class="c1"># volumes are there to let us persist data when containers are exited</span>
+      <span class="pi">-</span> <span class="s">.:/app</span>        <span class="c1"># bind a current directory of the host to the /app directory in the container</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">3000:3000</span>     <span class="c1"># bind port 3000 on host to port 3000 on container</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="s2">"</span><span class="s">npm</span><span class="nv"> </span><span class="s">run</span><span class="nv"> </span><span class="s">start"</span></code></pre></figure>
+
+<p>Before running the container, we have to install our dependencies. You may not have Node.js in your computer, or you may have a different version, so let’s run a Node container (of latest version) and install our dependencies (do not forget to attach a volume):</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker run <span class="nt">-it</span> <span class="nt">-v</span> <span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>:/app node /bin/bash
+<span class="c"># we are inside the container</span>
+npm <span class="nb">install
+exit</span> </code></pre></figure>
+
+<p>To run the actual service, type the following command (the <code class="language-plaintext highlighter-rouge">-f</code> option specifies the file to run) to run the server:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker-compose <span class="nt">-f</span> docker-compose.yml up</code></pre></figure>
+
+<p><strong>Note if you are getting ERROR:</strong> If you are getting the <code class="language-plaintext highlighter-rouge">ERROR: Error processing tar file(exit status 1): unexpected EOF</code>, run the following commands:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd</span> ..       <span class="c"># get out to the parent directory </span>
+<span class="nb">sudo chown</span> <span class="nt">-R</span> <span class="si">$(</span><span class="nb">whoami</span><span class="si">)</span> nodejs-debugging/  <span class="c"># this gives you and Docker the rights to the nodejs-debugging folder</span></code></pre></figure>
+
+<p>If you see <code class="language-plaintext highlighter-rouge">Listening on port 3000!</code> message, yay! Open a browser and type <code class="language-plaintext highlighter-rouge">localhost:3000</code>, and you will see the server is up. You can also try opening the routes, i.e. <code class="language-plaintext highlighter-rouge">/greet</code> and <code class="language-plaintext highlighter-rouge">/time</code>.</p>
+
+<h3 id="debugging-with-visual-studio-code">Debugging with Visual Studio Code</h3>
+
+<p>Visual Studio Code (VS Code) has a built-in debugging support for Node.js runtime and can debug any languages that are transpiled to JavaScript.</p>
+
+<p>Since the VS Code Node.js debugger communicates to the Node.js runtimes through wire protocols, the set of supported runtimes is determined by all runtimes supporting the wire protocols:</p>
+
+<ul>
+  <li><strong>legacy:</strong> the original <a href="https://github.com/buggerjs/bugger-v8-client/blob/master/PROTOCOL.md">V8 Debugger Protocol</a> which is currently supported by older runtimes.</li>
+  <li><strong>inspector:</strong> the new <a href="https://chromedevtools.github.io/debugger-protocol-viewer/v8/">V8 Inspector Protocol</a> is exposed via the <code class="language-plaintext highlighter-rouge">--inspect flag</code> in Node.js versions &gt;= 6.3. It addresses most of the limitations and scalability issues of the legacy protocol.</li>
+</ul>
+
+<p>As we are running a server from a Docker container, we have to attach a <em>remote</em> debugger. We need to add a <strong>launch configuration</strong> to the <code class="language-plaintext highlighter-rouge">.vscode</code> folder, i.e. <code class="language-plaintext highlighter-rouge">launch.json</code>. Here is an example of the launch configuration file:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+    </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.2.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attach"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Remote Debugging"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0.0.0"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"port"</span><span class="p">:</span><span class="w"> </span><span class="mi">9229</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"localRoot"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${workspaceFolder}/dist"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"remoteRoot"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/app/dist"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"protocol"</span><span class="p">:</span><span class="s2">"inspector"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<p>We set a <em>remote root</em> to be path in the container, where our program lives.</p>
+
+<p>Now, in order to add remote debugging, we have to add another script to package.json:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"debug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"npm run build &amp;&amp; node --inspect-brk=0.0.0.0:9229 ./dist/server.js"</span></code></pre></figure>
+
+<p>The <code class="language-plaintext highlighter-rouge">debug</code> script will build (i.e. transpile the TS code) project and will start Node runtime in debugging mode accessible remotely on port <code class="language-plaintext highlighter-rouge">9229</code> (remember the port we specified above?).</p>
+
+<p>Let’s create another Compose file, which we will use for running the server in the debug mode:</p>
+
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3"</span>          <span class="c1"># use version Compose version 3</span>
+<span class="na">services</span><span class="pi">:</span>             <span class="c1"># our services </span>
+  <span class="na">api</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">node</span>       <span class="c1"># use latest node image</span>
+    <span class="na">working_dir</span><span class="pi">:</span> <span class="s">/app</span> <span class="c1"># set the working directory to /app</span>
+    <span class="na">volumes</span><span class="pi">:</span>          <span class="c1"># volumes are there to let us persist data when containers are exited</span>
+      <span class="pi">-</span> <span class="s">.:/app</span>        <span class="c1"># bind a current directory of the host to the /app directory in the container</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">3000:3000</span>     <span class="c1"># bind port 3000 on host to port 3000 on container</span>
+      <span class="pi">-</span> <span class="s">9229:9229</span>     <span class="c1"># bind port 9229 for debugging</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="s2">"</span><span class="s">npm</span><span class="nv"> </span><span class="s">run</span><span class="nv"> </span><span class="s">debug"</span></code></pre></figure>
+
+<p>The only differences are that we are now running in <strong>debug mode</strong> and we attached extra <strong>port for debugging (9229)</strong>.</p>
+
+<p>Type the following command in the terminal so you can run the debug server:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker-compose <span class="nt">-f</span> docker-compose.debug.yml up</code></pre></figure>
+
+<p>And you will see the following message</p>
+
+<blockquote>
+  <p>api_1  | Debugger listening on ws://0.0.0.0:9229/f3cdf4f2-4685-21e6-8c31</p>
+</blockquote>
+
+<p>Yay! Now, as the debugger is listening on <code class="language-plaintext highlighter-rouge">0.0.0.0:9229</code>, we have to start debugging via VS Code. If you click <code class="language-plaintext highlighter-rouge">CTRL + SHIFT + D</code> keys, the “debug” mode will open. You will see the “Remote Debugging” slider upper-left corner and the button (looks like green triangle). E.g.:</p>
+
+<figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="/assets/img/debugger_view-480.webp" />
+    <source media="(max-width: 800px)" srcset="/assets/img/debugger_view-800.webp" />
+    <source media="(max-width: 1400px)" srcset="/assets/img/debugger_view-1400.webp" />
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="/assets/img/debugger_view.png" />
+
+  </picture>
+
+</figure>
+
+<p>Be courageous and click on the green triangle button. Congratulations! You have just started debugging your app using VS Code and Docker containers!</p>
+
+<h3 id="bonus-round-simplifying-debugging-further-">Bonus round! Simplifying debugging further …</h3>
+
+<p>Launching container manually, and proceeding to <em>Debug</em> view on VS Code may be a bit of a daunting and annoying task. However, we can <strong>automate</strong> that and make our lives a bit easier: let’s make it so that we can start debugging by just clicking <em>F5</em> key! :squirrel:</p>
+
+<p>Let’s first create the <strong>tasks</strong> file inside the <code class="language-plaintext highlighter-rouge">.vscode</code> directory, where our configurations for the VS Code reside. Copy-paste the following into the <code class="language-plaintext highlighter-rouge">tasks.json</code>:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+    </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"tasks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"launch-debug-container"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"docker-compose -f docker-compose.debug.yml up"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"shell"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"group"</span><span class="p">:</span><span class="w"> </span><span class="s2">"build"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"isBackground"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<p>Tasks help you automate building and testing your app. Whenever you start debugging, they may help you build your app first. There may be many tasks per launch configuration, so you can automate anything that annoys you and the steps you constantly repeat whenever you start debugging.</p>
+
+<p>In the task above, we label it as “launch-debug-container” and make it execute a command to start the containers specified in the <code class="language-plaintext highlighter-rouge">docker-compose.debug.yml</code> file.</p>
+
+<p>Now, how do we perform a task when we actually <em>launch</em> our debugging? We have to adjust <code class="language-plaintext highlighter-rouge">launch.json</code> by adding another field in our “Remote Debugging” configuration:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+  </span><span class="err">/*</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="err">*/</span><span class="w">
+  </span><span class="nl">"preLaunchTask"</span><span class="p">:</span><span class="w"> </span><span class="s2">"launch-debug-container"</span><span class="w">
+  </span><span class="err">/*</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="err">*/</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<p>By giving a <em>label</em> from <code class="language-plaintext highlighter-rouge">tasks.json</code> to the <em>preLaunchTask</em> property, our task will be executed first before launching our debugger. <strong>Note</strong> that I also change timeout to 60 seconds (default is 10 sec), as the containers <code class="language-plaintext highlighter-rouge">docker-compose.debug.yml</code> take some time to start.</p>
+
+<p>In addition, we want our containers to be stopped and removed after the debugging. If you don’t want to do so, then you are done! Otherwise, if you don’t like the containers still running after you have finished debugging, let’s add another task that will execute a command to stop and remove containers after the debugging session.</p>
+
+<p>Add the following to the list of tasks in your <code class="language-plaintext highlighter-rouge">tasks.json</code>:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+    </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"end-debug-container"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"docker-compose -f docker-compose.debug.yml down"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"shell"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"group"</span><span class="p">:</span><span class="w"> </span><span class="s2">"build"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"isBackground"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<p>This will turn the containers down whenever you finish the debugging process. Let’s also adjust the launch configuration in the <code class="language-plaintext highlighter-rouge">launch.json</code> by adding a <code class="language-plaintext highlighter-rouge">postDebugTask</code> property:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+  </span><span class="err">/*</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="err">*/</span><span class="w">
+  </span><span class="nl">"postDebugTask"</span><span class="p">:</span><span class="w"> </span><span class="s2">"end-debug-container"</span><span class="w">
+  </span><span class="err">/*</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="err">*/</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<p>Now is the moment … Just click <em>F5</em> and your debugging starts auto<em>magically</em>. If you exit debugging, you will see the containers terminating. Good job!</p>
+
+<p><strong>Note:</strong> if you are getting <code class="language-plaintext highlighter-rouge">The specified task cannot be tracked</code> error, click the <em>Debug anyway</em> button and your debugger will start.</p>
+
+<p><img src="https://media.makeameme.org/created/phew-thank-goodness.jpg" alt="squirrel" /></p>
+
+<h3 id="thank-you--feedback">Thank you + Feedback</h3>
+
+<p>Thank you and good job for reading the entire tutorial! It’s been a long markdown to read; anyway, you have just learned something new which will help you a lot debugging your Node.js apps and become a better developer!</p>
+
+<p>Constructive feedback is always welcome via <em>issues</em> on this repo.</p>
+
+<p><strong>PS.</strong> If something does not work, or if you have any problems, please open an issue in this repo and I will do my best to help you asap.</p>
+
+<h3 id="references">References</h3>
+
+<ul>
+  <li><a href="https://code.visualstudio.com/docs/nodejs/nodejs-debugging">Node.js Debugging in VS Code</a></li>
+  <li><a href="https://github.com/Microsoft/vscode-recipes/tree/master/Docker-TypeScript">Debugging TypeScript in a Docker Container</a></li>
+  <li><a href="https://www.tutorialspoint.com/docker/docker_compose.htm">Docker - Compose</a></li>
+</ul>]]></content><author><name></name></author><category term="tech" /><category term="node-js" /><category term="docker" /><category term="vs-code" /><summary type="html"><![CDATA[Learning to debug Node.js apps with Docker and VS Code.]]></summary></entry></feed>
