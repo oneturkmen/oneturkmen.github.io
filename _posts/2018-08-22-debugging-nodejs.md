@@ -5,6 +5,7 @@ date: 2018-08-22 12:00:00 -0500
 description: Learning to debug Node.js apps with Docker and VS Code.
 tags: node-js docker vs-code
 categories: tech 
+published: true
 ---
 
 #### Prerequisites
