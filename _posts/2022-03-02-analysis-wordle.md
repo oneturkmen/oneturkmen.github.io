@@ -17,9 +17,9 @@ guessing a word from the 1st attempt?".
 
 To answer the question above, we first need to get as many 5-letter words as
 possible. In other words, we need to build a *population* of 5-letter words to
-be able to calculate precise probabilities word occurrences, whether complete
+be able to calculate precise probabilities of word occurrences, whether complete
 (guessing entire target word) or partial (guessing one or more character of a
-target word). While it may be difficult to get a full data set of all 5-letter
+target word). While it may be difficult to get a complete data set of all 5-letter
 words in English, we can use some approximate datasets, such as the one with
 5757 5-letter words from [the Stanford
 GraphBase](https://www-cs-faculty.stanford.edu/~knuth/sgb.html). 
@@ -27,7 +27,7 @@ GraphBase](https://www-cs-faculty.stanford.edu/~knuth/sgb.html).
 Probability of guessing a target word on the 1st try is `1 / (number of all
 5-letter words)`. Evidently, it is a very low probability of success.
 What we can look for instead is *good starting word(s)*. Those are the words
-that will maximise our chance of guessing a target word in 6 attempts.
+that will maximise our chance of guessing a target word in 6 (or hopefully fewer) attempts.
 
 ## Good starter words
 
