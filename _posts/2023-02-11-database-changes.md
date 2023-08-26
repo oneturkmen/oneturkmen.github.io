@@ -145,8 +145,8 @@ Let's fill those functions with some concrete logic:
 ```python
 def upgrade():
 	# Add new columns 'first_name' and 'last_name' to the table 'contact'
-    op.add_column('contact', sa.Column('first_name', sa.Text))
-    op.add_column('contact', sa.Column('last_name', sa.Text))
+	op.add_column('contact', sa.Column('first_name', sa.Text))
+	op.add_column('contact', sa.Column('last_name', sa.Text))
 
 	# Split 'full_name' and move into 'first_name' and 'last_name'
 	results = op.execute("SELECT id, full_name FROM contact");
@@ -161,7 +161,7 @@ def upgrade():
 
 def downgrade():
 	# Add 'full_name' column back.
-    op.add_column('contact', sa.Column('full_name', sa.Text))
+	op.add_column('contact', sa.Column('full_name', sa.Text))
 
 	# Join 'first_name' and 'last_name' into 'full_name'
 	results = op.execute("SELECT id, first_name, last_name FROM contact");
