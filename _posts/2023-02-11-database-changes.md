@@ -7,32 +7,41 @@ tags: databases postgresql git
 categories: tech
 ---
 
+## Evolving requirements, evolving data 
 
 Today's world is dynamic and chaotic making it nearly impossible to predict
 what is expected in future. Similar behavior can be observed in software development,
 where requirements may drastically change within days even with careful, long-term planning.
-That is perhaps why Agile methodology is a popular and perhaps the "standard" approach
-to software development in today's world. <mark>TODO: Gotta improve intro. Focus on change management</mark>
+That is perhaps why Agile methodology is a popular and the "standard" approach
+to software development in today's world.
 
 Imagine a scenario in which you talk to a client about some cool mobile app
 idea, and they ask you to store, process, and display some data in the app.
-However, next day, they ask you for something else, so you need to address the
-change in client's requirements on data. In consequence, you need to make
+However, next week, they ask you for something else, so you need to address the
+change in client's requirements on data. As a consequence, you need to make
 changes to the application and the way it stores, processes, and renders the state.
 
 If we had something hard-coded in code that needed to be changed, it would be
 simply changing the value of the associated structures (e.g., variables or
-lists of strings). However, we typically use storage systems for storing the
-"state" or data.
+lists of strings). However, software developers detach code from data, and typically use storage systems for storing the "state" or data.
 
 Among all storage systems, there are variety of types, such as relational and
-non-relational (e.g., NoSQL) database systems. NoSQL databases, such as
-MongoDB, have no fixed schema, so it is easier to adapt to ever-changing
-requirements. In this post though, I would like to focus on changing the state in the
-relational SQL databases, such as PostgreSQL, in scalable and effective ways.
-In other words, how do we effectively manage changes in SQL databases knowing
-that we have a strict schema to follow?
+non-relational (e.g., NoSQL) database systems. Relational systems are great at
+establishing "relations" between different data entities, which in turn
+provide safeguards against data anomalies and often make it efficient to retrieve
+related data together.
 
+We know how developers commonly "version" source code changes to keep track of
+where the source code was and where it is at the moment. It is additionally
+great (and important!) for effective collaboration with other developers.
+However, changing database state is not as clear cut as changing code.
+Accidentally modifying (or even worse, deleting data) can result in large
+negative impact, including loss of monetary value and/or reputation.
+
+Luckily, we are not the first ones to counter such a problem.
+In this post, I would like to focus on changing the state in the
+relational SQL databases, such as PostgreSQL, in scalable and effective ways.
+By the end of this blog post, you will learn how to we effectively manage changes in SQL databases.
 
 ## Schema changes as migrations
 
@@ -41,82 +50,232 @@ with them. Changing the schema is a tricky task that can easily result in data
 inconsistency and even unexpected downtimes. Not surprisingly, making changes
 to the schema can be a nerve-wracking experience.
 
-The good news is that we are not alone. Software engineers have already
-encountered hundreds of issues involving schema changes, which sometimes
-resulted in lost billions <mark>ADD EXAMPLE HERE</mark> and even layoffs
-<mark>ADD EXAMPLE HERE</mark>. We are here to learn their lessons.
-
 If schema *changes* are important, then we should monitor them. We should
 track who makes the change, when it was made, and why it was made. Such
 approach is similar to *git* workflow, where incremental changes to code
 are noted in history with their authors and "commit" (or change) reasons.
 
-Akin to git "commits" that change application code, schema migrations
-are changes to the source code that represent the schema. Those changes
-can be applied incrementally (on top of each other) and can be easily reverted,
-if something goes wrong.
+Akin to git "commits" that keep track of changes to the application code,
+schema migrations are changes to the file(s) that represent the schema.
+Those changes can be applied incrementally (on top of each other) and can be
+easily reverted, if something goes wrong.
+
+Take a look at the example code snippet below where we want to split one column into two.
+The initial version contained a column `TEXT full_name` that stored a person's full name.
+A change to the schema was made to split `full_name` into `first_name` and `last_name`
+columns.
+
+```diff
+CREATE TABLE contact (
+	id INT GENERATED ALWAYS AS IDENTITY,
+-	TEXT full_name
++   TEXT first_name
++   TEXT last_name
+	TEXT email
+);
+```
+
+The changes made to the above SQL file can be tracked using `git`. That is somewhat
+"naive" way of applying changes to the schema because they are not immediately
+reflected in the database. Yes, the file changed in the Git repository, but
+that file cannot just be loaded again in the database to apply the changes.
+So, how do we apply such a change in the database to *actually* split the column
+into two?
+
+## Migration tools
+
+To apply the changes in the database so the new change is reflected there, we
+can use a *SQL schema migrations tool*, also known as [database-as-code migration tools](https://www.bytebase.com/blog/top-database-schema-change-tool-evolution/#gitops-database-as-code). There are plenty of amazing tools, both open source and free, as well as proprietary ones.
+
+I am going to use [Alembic](https://alembic.sqlalchemy.org/en/latest/tutorial.html#the-migration-environment), a lightweight schema migration tool that uses [SQLAlchemy](https://www.sqlalchemy.org/) as its engine.
+
+> If you have never worked with SQLAlchemy, it is a cool library that provides both object-relational mapping (ORM) and database toolkit for Python applications. It helps map SQL schema onto Python data structures for easier, in-code data management.
+
+Alembic keeps track of changes to the database schema through *revision scripts*.
+The revision scripts contain the "delta", or the change that is applied to the schema.
+Let's create a script for the example change that split a single column `full_name`
+into two columns `first_name` and `last_name`.
+To create a revision script, we can run the following command:
+
+```bash
+alembic revision -m "split full_name into first_name and last_name"
+```
+
+The command will generate a file named something like `a1829f4e7900_split_full_name.py`.
+Note the prefix of the file name - that's a revision hash used to mark a schema change,
+similar to a git commit hash.
+The contents of the file may look like this:
+
+```python
+"""Split full_name into first_name and last_name
+
+Revision ID: a1829f4e7900
+Revises:
+Create Date: 2023-02-02 11:40:27.089406
+"""
+
+# revision identifiers, used by Alembic.
+revision = 'a1829f4e7900'
+down_revision = None
+branch_labels = None
+
+from alembic import op
+import sqlalchemy as sa
+
+def upgrade():
+    pass
+
+def downgrade():
+    pass
+```
+
+The file comes with a docstring with the short description of the change,
+revision ID, and creation date. Note that the comment also mentions `"Revises: "`,
+which indicates the previous revision ID. It is obviously empty in our file
+because that is our first revision. If we created another revision on top of
+the one we just generated, the new revision script would have `"Revises: a1829f4e7900"`.
+Further, the variable `down_revision` indicates the same thing.
+
+Note that we also have two empty functions generated for us, namely `upgrade()` and `downgrade()`. The former allows us to add logic for the new schema change, while
+the latter lets us add the logic to *revert* that new change in case of potential
+problems down the line (e.g., during deployment to QA).
+
+Let's fill those functions with some concrete logic:
+
+```python
+def upgrade():
+	# Add new columns 'first_name' and 'last_name' to the table 'contact'
+    op.add_column('contact', sa.Column('first_name', sa.Text))
+    op.add_column('contact', sa.Column('last_name', sa.Text))
+
+	# Split 'full_name' and move into 'first_name' and 'last_name'
+	results = op.execute("SELECT id, full_name FROM contact");
+	for id, full_name in results:
+		# Logic to split the name and insert into table
+		first_name, last_name = full_name.split(' ')
+		op.execute(f"UPDATE contact SET first_name = {first_name} WHERE id = {id}")
+		op.execute(f"UPDATE contact SET last_name = {last_name} WHERE id = {id}")
+	
+	# Finally, drop the column
+	op.drop_column('contact', 'full_name')
+
+def downgrade():
+	# Add 'full_name' column back.
+    op.add_column('contact', sa.Column('full_name', sa.Text))
+
+	# Join 'first_name' and 'last_name' into 'full_name'
+	results = op.execute("SELECT id, first_name, last_name FROM contact");
+	for id, first_name, last_name in results:
+		# Logic to split the name and insert into table
+		full_name = ' '.join(first_name, last_name)
+		op.execute(f"UPDATE contact SET full_name = {full_name} WHERE id = {id}")
+	
+	# Finally, drop 'first_name' and 'last_name' columns
+	op.drop_column('contact', 'first_name')
+	op.drop_column('contact', 'last_name')
+```
+
+> The snippet above only serves as a simplified example to showcase a schema revision script. It is not an optimal logic. Be careful when actually splitting full name into first and last names. In some cultures, there are no last names, or the last names may consist of multiple space-separate words. Lastly, make sure to RESTART your identity columns. You don't want to accidentally cause an integer overflow in transaction ids. 
+
+The `upgrade()` function above performs three important steps: (1) creates two columns,
+(2) populates the two columns from an existing, older column, and (3) removes the older
+column that is no longer needed. Not surprisingly, the `downgrade()` function is
+the inverse operation of `upgrade()`: we add one column back, re-populate it from the two columns, and remove those two columns.
+
+> It's best to keep migration scripts as short as possible. Even the snippet above could be split into multiple migration scripts. For example, in one revision, we can just add two columns. In the next one, we split the name into two parts and populate these two new columns. In the third and final revision, we get rid of the older column. Having smaller migration scripts allows users of the database to adjust their code without immediate breaking changes. More on [evolutionary database design](https://www.martinfowler.com/articles/evodb.html) later.
+
+After creating the script, we can now run `alembic upgrade head` to apply the change in the database.
+
+```bash
+$ alembic upgrade head
+INFO  [alembic.context] Context class PostgresqlContext.
+INFO  [alembic.context] Will assume transactional DDL.
+INFO  [alembic.context] Running upgrade None -> a1829f4e7900
+```
+
+In case something goes terribly wrong, we can also revert that revision:
+
+```bash
+$ alembic downgrade -1
+INFO  [alembic.context] Context class PostgresqlContext.
+INFO  [alembic.context] Will assume transactional DDL.
+INFO  [alembic.context] Running downgrade a1829f4e7900 -> None
+```
+
+Interestingly (and actually quite importantly), Alembic runs the above revision script within a transaction. Transactions are atomic in SQL databases (e.g., PostgreSQL), so if
+something fails within the transaction, it will be automatically rollbacked to the previous
+state to keep the database consistant. That's amazing!
+
+## Benefits of migration tools
+
+With the help of the tools such as Alembic, teams can seamlessly work together
+on the schema changes and not be worried of corrupting the database state.
+Such tools provide developers with a nice view of schema changes as scripts,
+which makes it easier for them to keep track of, as well as code review together.
+In addition, migration tools are a great addition to continuous integration and delivery
+(CI/CD) pipelines, which can run automated migrations in different environments
+such as Development and Production.
+
+If you would like to learn more about applying Agile methodologies to databases,
+check out the following great articles:
+
+- [Evolutionary Database Design by Martin Fowler](https://www.martinfowler.com/articles/evodb.html)
+- If you are PostgreSQL user, their [documentation](https://www.postgresql.org/docs) is great along with the ["Don't Do This" best practices](https://wiki.postgresql.org/wiki/Don't_Do_This) wiki.
+
+## Disadvantages
+
+There is no silver bullet in software engineering. The same applies to using migration tools. Some of the biggest disadvantages are that:
+
+- **Tools can be expensive.** Some of the tools come with great benefits ... at a $-value 
+cost. I have personally not used such tools, but perhaps they can provide greater benefits
+such as a separate UI for managing migrations.
+- **It may be unclear what schema looks like at a given point.** If schema evolves
+rapidly, there be a rapid flow of new files being created and applied, adding more complexity to the codebase and making it unclear what the schema looks like at a given point of time.
+- **If something does not work, we need a new revision script**. If some migration script 
+is found to have some logical issues (a.k.a. bugs) later on in the development cycle, it ]
+may require another migration script to fix the issue, because we don't want to modify 
+existing migration scripts.
 
 
-- What are migrations
-- Why are they needed.
-- How to manage them effectively.
-	- liquibase.
-	- sqlalchemy with alembic.
-	- migra.
-- Benefits
-	- Easy to review and nitpick.
-	- Multiple people can work on the same database the same way they work on code (via git).
-	- can revert if troublesome.
-- Costs
-	- Can have too many files, except migra.
-	- If migration is found to be buggy, need another migration file.
-	- not always clear what the schema looks like at a given point.
+## Final thoughts
 
-## Automating testing and deploying database changes with CI/CD 
+Tools such as Alembic are great for managing change in database state. As everything
+else in life, they come with pros and cons software development teams need to consider
+before adapting such tools in their development lifecycle. In general, changing
+database state can be a tricky thing and cause a nerve-wracking experience,
+but it is a much easier and smoother experience with the right migration tools and processes (CI/CD) at hand.
 
-- How can we automate migrations?
-- How do we adapt Jenkins/GitHub actions to integrating database changes?
-	- create a copy of a database, load dummy data
-	- run tests
-- How do we test database changes?
-	- pytest
-	- in-db tests (forgot how they are called)
-- How do we deploy database changes to prod?
-	- end-to-end tests.
-	- may need to acquire exclusive locks on associated tables to migrate. But can do this in a scheduled way at night.
-	- monitoring performance & alerts.
+## P.S. Wanna give Alembic a try?
 
-## Conclusion
+I created a simple Dockerfile that will let you play with alembic.
+This assumes that you have [Docker](https://www.docker.com/) installed locally.
 
-- It is difficult. Surgeon's work bcz you don't want to lose data.
-- Many considerations.
-- Do backups, and do them often if you have an actively-used database.
+```Dockerfile
+# Use an official PostgreSQL image as the base image
+FROM postgres:latest
 
+ENV PYENV="/app/alembic_env"
 
-Intro:
-- Requirements change a lot, and so is state.
-- State is usually stored in a storage system, such a database system.
-- There are numerous well-known databases, such as PostgreSQL and MongoDB.
-- While it's easy to adapt to changing schema in NoSQL, it is not straightforward in SQL.
-- Popular SQL databases do not have flexible schema.
-- On top of that, multiple people can make changes to a single database schema.
-- How do we simplify the integration of multitude of changes introduced by multiple people?
+# Install necessary packages for Python and Alembic
+RUN apt-get update && \
+    apt-get install -y python3 python3-pip python3-venv && \
+    mkdir -p "$PYENV" && \
+    python3 -m venv "$PYENV" && \
+    . $PYENV/bin/activate && \
+    pip3 install alembic
 
-Content:
-- We treat schema changes the same way we treat source code changes.
-- At a file level, we can track what's happening.
-- But! The problem is that some changes may not be backward compatible.
-- Imagine a scenario where we break down a single column into two.
-- For example, "full name" becomes "first_name" and "last_name".
-- How can we break it up without "surprising" the users of the database and not breaking any downstream code?
-- We can make changes in stages.
-- Stage 1: Bring new columns (we do not remove any existing ones).
-- Stage 2: We relay information to the developers to adjust their code.
-- Stage 3: We break the data from the old column to the new columns, and set up additional constraints if necessary.
-- However, that's not great because we have to wait until consuming applications address changes in their code.
-- In addition, a data race may occur when the old column gets modified while the new column stays the same, leading to inconsistency.
-- Additional effort is needed to address such inconsistencies.
+# Set environment variables for PostgreSQL
+ENV POSTGRES_USER myuser
+ENV POSTGRES_PASSWORD mypassword
+ENV POSTGRES_DB mydb
 
-Conclusion:
-- 
+# Expose the PostgreSQL port
+EXPOSE 5432
+```
 
+Copy and paste the contents above to your local computer. Then, build and run the image.
+
+```bash
+$ docker build -t postgres_alembic:latest . && \
+	docker run -it postgres_alembic:latest /bin/bash
+```
