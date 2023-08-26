@@ -69,8 +69,8 @@ columns.
 CREATE TABLE contact (
 	id INT GENERATED ALWAYS AS IDENTITY,
 -	TEXT full_name
-+   TEXT first_name
-+   TEXT last_name
++	TEXT first_name
++	TEXT last_name
 	TEXT email
 );
 ```
