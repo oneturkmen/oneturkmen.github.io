@@ -55,10 +55,10 @@ to the schema can be a nerve-wracking experience.
 If schema changes are important, then we should monitor them. We should
 track who makes the change, when it was made, and why it was made. We should have
 something similar to
-[Git workflow](https://www.atlassian.com/git/tutorials/comparing-workflows), where
+[git workflow](https://www.atlassian.com/git/tutorials/comparing-workflows), where
 incremental changes to code are noted in history.
 
-Akin to git "commits", that keep track of changes in the application code,
+Akin to `git` commits, that keep track of changes in the application code,
 schema migrations are changes to the file(s) that represent the schema.
 Those changes can be applied incrementally (on top of each other) and can be
 easily reverted, if something goes wrong.
@@ -78,17 +78,19 @@ CREATE TABLE contact (
 );
 ```
 
-The changes made to the above SQL file can be tracked using `git`. That is somewhat
-"naive" way of applying changes to the schema because they are not immediately
-reflected in the database. Yes, the file changed in the Git repository, but
-that file cannot just be loaded again in the database to apply the changes.
-So, how do we apply such a change in the database to *actually* split the column
+The changes made to the above SQL file can be tracked using `git`. That is an incomplete
+way of applying changes to the schema because they are not immediately
+reflected in the database. Yes, the file changed in the `git` repository, but
+that file cannot just be loaded in the database to apply the changes.
+So, how do we apply such a change in the database to actually split the column
 into two?
 
 ## Migration tools
 
-To apply the changes in the database so the new change is reflected there, we
-can use a *SQL schema migrations tool*, also known as [database-as-code migration tools](https://www.bytebase.com/blog/top-database-schema-change-tool-evolution/#gitops-database-as-code). There are plenty of amazing tools, both open source and free, as well as proprietary ones.
+To apply the changes in the database, we
+can use a *SQL schema migration tool*, also known as
+[database-as-code migration tool](https://www.bytebase.com/blog/top-database-schema-change-tool-evolution/#gitops-database-as-code).
+There are plenty of amazing tools, both open source and free, as well as proprietary ones.
 
 I am going to use [Alembic](https://alembic.sqlalchemy.org/en/latest/tutorial.html#the-migration-environment), a lightweight schema migration tool that uses [SQLAlchemy](https://www.sqlalchemy.org/) as its engine.
 
@@ -96,7 +98,7 @@ I am going to use [Alembic](https://alembic.sqlalchemy.org/en/latest/tutorial.ht
 
 Alembic keeps track of changes to the database schema through *revision scripts*.
 The revision scripts contain the "delta", or the change that is applied to the schema.
-Let's create a script for the example change that split a single column `full_name`
+Let's create an example script to split a single column `full_name`
 into two columns `first_name` and `last_name`.
 To create a revision script, we can run the following command:
 
@@ -105,9 +107,9 @@ alembic revision -m "split full_name into first_name and last_name"
 ```
 
 The command will generate a file named something like `a1829f4e7900_split_full_name.py`.
-Note the prefix of the file name - that's a revision hash used to mark a schema change,
-similar to a git commit hash.
-The contents of the file may look like this:
+Note the prefix of the file name - that's a revision hash used to mark a
+schema change, similar to a git commit hash. The contents of the file may look
+like this:
 
 ```python
 """Split full_name into first_name and last_name
@@ -135,8 +137,8 @@ def downgrade():
 The file comes with a docstring with the short description of the change,
 revision ID, and creation date. Note that the comment also mentions `"Revises: "`,
 which indicates the previous revision ID. It is obviously empty in our file
-because that is our first revision. If we created another revision on top of
-the one we just generated, the new revision script would have `"Revises: a1829f4e7900"`.
+because we just created our first revision. If we created another revision in addition
+to the one we just generated, the new revision script would have `"Revises: a1829f4e7900"`.
 Further, the variable `down_revision` indicates the same thing.
 
 Note that we also have two empty functions generated for us, namely `upgrade()` and `downgrade()`. The former allows us to add logic for the new schema change, while
@@ -178,14 +180,14 @@ def downgrade():
 	op.drop_column('contact', 'last_name')
 ```
 
-> The snippet above only serves as a simplified example to showcase a schema revision script. It is not an optimal logic. Be careful when actually splitting full name into first and last names. In some cultures, there are no last names, or the last names may consist of multiple space-separate words. Lastly, make sure to RESTART your identity columns. We don't want to accidentally cause an integer overflow in transaction ids. 
+> The snippet above only serves as a simplified example to showcase a schema revision script. It is not an optimal logic. Be careful when actually splitting full name into first and last names. In some cultures, there are no last names, or the last names may consist of multiple space-separate words. Lastly, make sure to `RESTART` your identity columns. We don't want to accidentally cause an integer overflow in transaction ids. 
 
 The `upgrade()` function above performs three important steps: (1) creates two columns,
 (2) populates the two columns from an existing, older column, and (3) removes the older
 column that is no longer needed. Not surprisingly, the `downgrade()` function is
 the inverse operation of `upgrade()`: we add one column back, re-populate it from the two columns, and remove those two columns.
 
-> It's best to keep migration scripts as short as possible. Even the snippet above could be split into multiple migration scripts. For example, in one revision, we can just add two columns. In the next one, we split the name into two parts and populate these two new columns. In the third and final revision, we get rid of the older column. Having smaller migration scripts allows users of the database to adjust their code without immediate breaking changes. More on [evolutionary database design](https://www.martinfowler.com/articles/evodb.html) later.
+> It's best to keep migration scripts as small as possible. Even the snippet above could be split into multiple migration scripts. For example, in one revision, we can just add two columns. In the next one, we split the name into two parts and populate these two new columns. In the third and final revision, we get rid of the older column. Having smaller migration scripts allows users of the database to adjust their code without immediately causing breaking changes. More on [evolutionary database design](https://www.martinfowler.com/articles/evodb.html) later.
 
 After creating the script, we can now run `alembic upgrade head` to apply the change in the database.
 
@@ -212,18 +214,18 @@ state to keep the database consistent. That's amazing!
 
 ## Benefits of migration tools
 
-With the help of the tools such as Alembic, teams can seamlessly work together
+With the help of tools such as Alembic, teams can seamlessly work together
 on the schema changes and not be worried of corrupting the database state.
 Such tools provide developers with a nice view of schema changes as scripts,
-which makes it easier for them to keep track of, as well as code review together.
-In addition, migration tools are a great addition to continuous integration and delivery
-(CI/CD) pipelines, which can run automated migrations in different environments
-such as Development and Production.
+which makes it easier for them to keep track of, as well as, perform code reviews 
+together. Migration tools are also a great addition to continuous integration and 
+delivery (CI/CD) pipelines, which can run automated migrations in different 
+environments such as Development and Production.
 
 If you would like to learn more about applying Agile methodologies to databases,
-check out the following great articles:
+check out the following articles:
 
-- [Evolutionary Database Design by Martin Fowler](https://www.martinfowler.com/articles/evodb.html)
+- [Evolutionary Database Design by Martin Fowler](https://www.martinfowler.com/articles/evodb.html) describes a novel (at the published time) approach for database change management.
 - If you are PostgreSQL user, their [documentation](https://www.postgresql.org/docs) is great along with the ["Don't Do This" best practices](https://wiki.postgresql.org/wiki/Don't_Do_This) wiki.
 
 ## Disadvantages
@@ -233,25 +235,23 @@ There is no silver bullet in software engineering. The same applies to using mig
 - **Tools can be expensive.** Some of the tools come with great benefits ... at a $-value 
 cost. I have personally not used such tools, but perhaps they can provide greater benefits
 such as a separate UI for managing migrations.
-- **It may be unclear what schema looks like at a given point.** If schema evolves
-rapidly, there be a rapid flow of new files being created and applied, adding more complexity to the codebase and making it unclear what the schema looks like at a given point of time.
-- **If something does not work, we need a new revision script**. If some migration script 
-is found to have some logical issues (a.k.a. bugs) later on in the development cycle, it ]
-may require another migration script to fix the issue, because we don't want to modify 
-existing migration scripts.
+- **It is unclear what schema looks like at a given point.** If schema evolves
+rapidly, there could be a rapid flow of new revision scripts being created and applied to the database. These add more complexity and make it difficult for developers to determine what the schema looks like at a given point of time.
+- **If something does not work, we need a new revision script**. If some migration script is found to have some logical issues (a.k.a. bugs) after it was already applied, another migration script is likely required to fix the issue, since modifying existing scripts could lead to corrupt database state.
 
 
 ## Final thoughts
 
 Tools such as Alembic are great for managing change in database schema. As everything
-else in life, they come with pros and cons software development teams need to consider
-before adapting such tools in their development lifecycle. In general, changing
-database schema can be a tricky thing and cause a nerve-wracking experience,
-but it is a much easier and smoother experience with the right migration tools and processes (CI/CD) at hand.
+else in life, they come with pros and cons that software development teams need to
+consider before adapting such tools in their development lifecycle. In general, 
+changing database schema can be a tricky thing and cause a nerve-wracking experience,
+but it becomes much simpler and smoother with the right migration tools 
+and processes (CI/CD) at hand.
 
 ## P.S. Wanna give Alembic a try?
 
-I created a simple Dockerfile that will let you play with alembic.
+I created a simple Dockerfile that will let you play with Alembic.
 This assumes that you have [Docker](https://www.docker.com/) installed locally.
 
 ```Dockerfile
