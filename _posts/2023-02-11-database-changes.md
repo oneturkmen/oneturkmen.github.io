@@ -17,45 +17,48 @@ to software development in today's world.
 
 Imagine a scenario in which you talk to a client about some cool mobile app
 idea, and they ask you to store, process, and display some data in the app.
-However, next week, they ask you for something else, so you need to address the
+However, next week, they ask us for something else, so you need to address the
 change in client's requirements on data. As a consequence, you need to make
-changes to the application and the way it stores, processes, and renders the state.
+changes to the application and the way it stores, processes, and renders the data.
 
 If we had something hard-coded in code that needed to be changed, it would be
 simply changing the value of the associated structures (e.g., variables or
-lists of strings). However, software developers detach code from data, and typically use storage systems for storing the "state" or data.
+lists of strings). However, software developers detach code from data, and typically use storage systems for storing the data.
 
-Among all storage systems, there are variety of types, such as relational and
-non-relational (e.g., NoSQL) database systems. Relational systems are great at
-establishing "relations" between different data entities, which in turn
+There is a variety of database systems, such as relational and
+non-relational (e.g., NoSQL). The relational systems are great at
+establishing "relations" between different data entities, which
 provide safeguards against data anomalies and often make it efficient to retrieve
-related data together.
+related data together (e.g., through table joins and column indexes).
 
 We know how developers commonly "version" source code changes to keep track of
-where the source code was and where it is at the moment. It is additionally
-great (and important!) for effective collaboration with other developers.
-However, changing database state is not as clear cut as changing code.
+where the source code was and where it is at the moment. Additionally, it is important
+for effective collaboration with other developers.
+However, changing database schema is not as clear cut as changing code.
 Accidentally modifying (or even worse, deleting data) can result in large
 negative impact, including loss of monetary value and/or reputation.
 
-Luckily, we are not the first ones to counter such a problem.
-In this post, I would like to focus on changing the state in the
-relational SQL databases, such as PostgreSQL, in scalable and effective ways.
-By the end of this blog post, you will learn how to we effectively manage changes in SQL databases.
+Luckily, we are not the first ones to encounter such a problem.
+In this post, I would like to focus on changing the schema in the
+relational SQL databases, such as PostgreSQL, in effective ways
+that keeps the database state consistent.
+By the end of this blog post, we will learn how to effectively manage changes in SQL
+databases.
 
 ## Schema changes as migrations
 
-Software requirements change frequently, and so are database schema associated
+Software requirements change frequently, and so do database schema associated
 with them. Changing the schema is a tricky task that can easily result in data
 inconsistency and even unexpected downtimes. Not surprisingly, making changes
 to the schema can be a nerve-wracking experience.
 
-If schema *changes* are important, then we should monitor them. We should
-track who makes the change, when it was made, and why it was made. Such
-approach is similar to *git* workflow, where incremental changes to code
-are noted in history with their authors and "commit" (or change) reasons.
+If schema changes are important, then we should monitor them. We should
+track who makes the change, when it was made, and why it was made. We should have
+something similar to
+[Git workflow](https://www.atlassian.com/git/tutorials/comparing-workflows), where
+incremental changes to code are noted in history.
 
-Akin to git "commits" that keep track of changes to the application code,
+Akin to git "commits", that keep track of changes in the application code,
 schema migrations are changes to the file(s) that represent the schema.
 Those changes can be applied incrementally (on top of each other) and can be
 easily reverted, if something goes wrong.
@@ -175,7 +178,7 @@ def downgrade():
 	op.drop_column('contact', 'last_name')
 ```
 
-> The snippet above only serves as a simplified example to showcase a schema revision script. It is not an optimal logic. Be careful when actually splitting full name into first and last names. In some cultures, there are no last names, or the last names may consist of multiple space-separate words. Lastly, make sure to RESTART your identity columns. You don't want to accidentally cause an integer overflow in transaction ids. 
+> The snippet above only serves as a simplified example to showcase a schema revision script. It is not an optimal logic. Be careful when actually splitting full name into first and last names. In some cultures, there are no last names, or the last names may consist of multiple space-separate words. Lastly, make sure to RESTART your identity columns. We don't want to accidentally cause an integer overflow in transaction ids. 
 
 The `upgrade()` function above performs three important steps: (1) creates two columns,
 (2) populates the two columns from an existing, older column, and (3) removes the older
@@ -202,9 +205,10 @@ INFO  [alembic.context] Will assume transactional DDL.
 INFO  [alembic.context] Running downgrade a1829f4e7900 -> None
 ```
 
-Interestingly (and actually quite importantly), Alembic runs the above revision script within a transaction. Transactions are atomic in SQL databases (e.g., PostgreSQL), so if
+Interestingly (and actually quite importantly), Alembic runs the above revision script 
+within a transaction. Transactions are atomic in SQL databases (e.g., PostgreSQL), so if
 something fails within the transaction, it will be automatically rollbacked to the previous
-state to keep the database consistant. That's amazing!
+state to keep the database consistent. That's amazing!
 
 ## Benefits of migration tools
 
@@ -239,10 +243,10 @@ existing migration scripts.
 
 ## Final thoughts
 
-Tools such as Alembic are great for managing change in database state. As everything
+Tools such as Alembic are great for managing change in database schema. As everything
 else in life, they come with pros and cons software development teams need to consider
 before adapting such tools in their development lifecycle. In general, changing
-database state can be a tricky thing and cause a nerve-wracking experience,
+database schema can be a tricky thing and cause a nerve-wracking experience,
 but it is a much easier and smoother experience with the right migration tools and processes (CI/CD) at hand.
 
 ## P.S. Wanna give Alembic a try?
