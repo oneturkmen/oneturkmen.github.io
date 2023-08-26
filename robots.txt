@@ -4,4 +4,12 @@ permalink: /robots.txt
 User-agent: *
 Disallow:
 
+# Don't add any content to the GPT model
+User-agent: GPTBot
+Disallow: /
+
+# No ChatGPT user allowed anywhere on the site
+User-agent: ChatGPT-User
+Disallow: /
+
 Sitemap: {{ site.baseurl | prepend: site.url }}/sitemap.xml
