@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "TODO: Something about managing database schema changes using git"
+title: "The Art of Controlled Evolution: How Migration Tools Shape Database Schemas"
 date: 2022-03-02 21:00:00 -0700
-description: Managing database schema changes. 
+description: Guide to managing database changes with confidence. 
 tags: databases postgresql git
 categories: tech
 ---
