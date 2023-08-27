@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "The Art of Controlled Evolution: How Migration Tools Shape Database Schemas"
-date: 2022-03-02 21:00:00 -0700
+date: 2023-04-02 21:00:00 -0700
 description: Guide to managing database changes with confidence. 
 tags: databases postgresql git
 categories: tech
