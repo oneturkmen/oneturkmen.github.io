@@ -17,7 +17,7 @@ to software development in today's world.
 
 Imagine a scenario in which you talk to a client about some cool mobile app
 idea, and they ask you to store, process, and display some data in the app.
-However, next week, they ask us for something else, so you need to address the
+However, next week, they ask you us for something else, so you need to address the
 change in client's requirements on data. As a consequence, you need to make
 changes to the application and the way it stores, processes, and renders the data.
 
