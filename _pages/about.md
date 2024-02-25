@@ -12,10 +12,10 @@ social: true  # includes social icons at the bottom of the page
 
 Hi there!
 
-I am a machine learning software engineer at [Borealis AI](https://borealisai.com/),
+I am a machine learning engineer at [Borealis AI](https://borealisai.com/),
 an AI research institute founded by the [Royal Bank of Canada](https://rbc.com).
 I build data-intensive software systems that leverage artificial intelligence (AI) for applications in
-finance (e.g., credit risk modelling, model robustness and fairness).
+finance (credit risk, model robustness and fairness).
 
 Previously, I completed a Master of Science in Computer Science from the [University of Alberta](https://ualberta.ca)
 in program analysis and code mining. I had an opportunity to be

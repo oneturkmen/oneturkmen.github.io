@@ -1,0 +1,4 @@
+- Use polars
+- Use parquet for OLAP avro for OLTP
+- Use profilers
+- 
