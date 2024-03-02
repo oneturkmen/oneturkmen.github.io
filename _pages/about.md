@@ -14,8 +14,8 @@ Hi there!
 
 I am a machine learning engineer at [Borealis AI](https://borealisai.com/),
 an AI research institute founded by the [Royal Bank of Canada](https://rbc.com).
-I build data-intensive software systems that leverage artificial intelligence (AI) for applications in
-finance (credit risk, model robustness and fairness).
+I build and ship data-intensive software systems that leverage artificial intelligence (AI) for applications in
+banking and finance (credit risk, model robustness and fairness).
 
 Previously, I completed a Master of Science in Computer Science from the [University of Alberta](https://ualberta.ca)
 in program analysis and code mining. I had an opportunity to be
