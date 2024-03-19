@@ -163,7 +163,7 @@ duckdb.duckdb.OutOfMemoryException: Out of Memory Error: Failed to allocate bloc
 
 As mentioned in the Setup section, I tried playing with several configuration parameters like `temp_directory` and `preserve_insertion_order`. Neither of them fixed the issue.
 
-**Dask.** Our Dask test took between **175** seconds (~3 minutes), much slower than Polars.
+**Dask.** Our Dask test took between **175 seconds** (~3 minutes), much slower than Polars.
 There were no surprises with Dask, but I also think it was not built for single-computer data processing. Even though I have not tested it yet, it would most likely shine in distributed computing environments where one can run data-intensive programs across many computers.
 
 ## Conclusion
