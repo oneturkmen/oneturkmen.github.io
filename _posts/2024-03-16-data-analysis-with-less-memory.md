@@ -162,7 +162,6 @@ that most of the entries in the column are indeed of type `int64`, however it re
 
 We are finally in the results section! So here are they for each of tool set up above.
 
-
 | Polars  | DuckDB | Dask |
 | ------------- | ---- | ---- |
 | 8-15 seconds  | OOM  | 170-185 seconds |
