@@ -113,14 +113,24 @@ print(f"It took {end_time - start_time} seconds to run DuckDB test.")
 ```
 
 In the snippet above, we read the CSV files within the SQL statement using `read_csv()` function. I had to set `union_by_name`
-parameter to make it work; otherwise, it throws `duckdb.duckdb.InvalidInputException: Invalid Input Error: Mismatch between the schema of different files`.
+parameter to circumvent the `duckdb.duckdb.InvalidInputException: Invalid Input Error: Mismatch between the schema of different files`. The parameter combines schemas of different files by column name. 
 
 Also note couple configuration parameters, namely `preserve_insertion_order = false` and `temp_directory = './temp'`.
 The former is set to flag DuckDB that it does not have to preserve the order of the files it reads. Disabling
 the insertion order preserves memory. For the latter, setting `temp_directory` should have enabled us processing
-data larger than memory. According to DuckDB, "if DuckDB is running in in-memory mode, it cannot use disk to offload data if it does not fit into main memory. To enable offloading in the absence of a persistent database file, use the `SET temp_directory` statement". Despite many tries with different parameters, I could not make it work. Some folks
+data larger than memory. According to DuckDB,
+
+> If DuckDB is running in in-memory mode, it cannot use disk to offload data if it does not fit into main memory. To enable offloading in the absence of a persistent database file, use the `SET temp_directory` statement".
+
+Despite many tries with different parameters, I could not make it work. Some folks
 needed to set [number of threads to 1](https://github.com/duckdb/duckdb/issues/11054) to make it work. Others
-recommended using some [nightly build](https://github.com/duckdb/duckdb/issues/11054#issuecomment-1985758719) that fixes the issue, but it looks like the issue is still there.   
+recommended using some [nightly build](https://github.com/duckdb/duckdb/issues/11054#issuecomment-1985758719) that fixes the issue, but it looks like the issue is still there.
+
+That's quite unfortunate given that DuckDB claims that the [larger-than-memory workloads](https://duckdb.org/docs/guides/performance/how_to_tune_workloads.html#larger-than-memory-workloads-out-of-core-processing) are its "key strength":
+
+> A key strength of DuckDB is support for larger-than-memory workloads, i.e., it is able to process data sets that are larger than the available system memory (also known as out-of-core processing). It can also run queries where the intermediate results cannot fit into memory.
+
+Welp, did not work for me :/
 
 **Dask.** Dask is a library for parallel computing in Python. It is a feature-rich library that lets you scale Python code from a single computer to large distributed clusters.
 
@@ -152,6 +162,11 @@ that most of the entries in the column are indeed of type `int64`, however it re
 
 We are finally in the results section! So here are they for each of tool set up above.
 
+
+| Polars  | DuckDB | Dask |
+| ------------- | ---- | ---- |
+| 8-15 seconds  | OOM  | 170-185 seconds |
+
 **Polars.** Polars is a winner with its setup script taking between **8-15 seconds** to get the CSV file with the results.
 The setup, as you have seen, looks simple enough, it is readable, no surprises.
 
@@ -172,3 +187,5 @@ So here we have the results for the three tools. Polars is a clear winner here, 
 results for one specific test which is about performing data analysis on data that is larger than memory. I am sure
 DuckDB is as performant as Polars, although I could not get the out-of-memory issue resolved. Dask is in between, likely a choice better for distributed computing environments rather
 than a single computer case.
+
+The source code is open source and available here: 
