@@ -188,4 +188,4 @@ results for one specific test which is about performing data analysis on data th
 DuckDB is as performant as Polars, although I could not get the out-of-memory issue resolved. Dask is in between, likely a choice better for distributed computing environments rather
 than a single computer case.
 
-The source code is open source and available here: 
+The source code is open source and available [here on GitHub](https://github.com/oneturkmen/experiments-with-olap-triad).
