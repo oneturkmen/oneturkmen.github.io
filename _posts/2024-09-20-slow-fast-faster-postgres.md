@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "(In)efficient Insertions in Postgres"
-date: 2024-03-16 22:21:31 -0700
+date: 2024-09-20 15:12:54 -0700
 description: Multiple ways to insert large amount of data in the database. 
 tags: databases performance storage
 categories: tech
