@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Making Structured Decisions with MCDM"
+title: "A Simple Method for Smarter Decision Making"
 date: 2025-02-05 09:31:12 -0700
 description: Simple framework for making complex decisions.
 tags: decision-theory
