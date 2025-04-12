@@ -12,13 +12,13 @@ social: true  # includes social icons at the bottom of the page
 
 Hi there!
 
-I am a Machine Learning (ML) Software Engineer at [Borealis AI](https://borealisai.com/),
-an AI research institute founded by the [Royal Bank of Canada](https://rbc.com).
-I build data-intensive machine learning systems for enhancing banking and
-financial applications (credit risk, explainability, robustness and fairness).
+I am a software engineer on the ML Foundations team at [Stripe](https://stripe.com/),
+where I help build core infrastructure for scalable ML across the company.
 
-Previously, I completed a Master of Science in Computer Science from the [University of Alberta](https://ualberta.ca)
-where I used data mining techniques for program analysis. I had an opportunity to be
-[the first author of two papers](https://scholar.google.com/citations?user=dpV2oe0AAAAJ)
-published in two large software engineering conferences (ICSE 2021 and ICSME 2022).
-I also worked as a software engineer at an AI startup in Bulgaria.
+Previously, I worked in [the AI division of a big Canadian bank](https://rbcborealis.com), focusing on ML serving and observability within the credit domain.
+
+I hold an MSc in CS from the [University of Alberta](https://ualberta.ca),
+where I focused on preventing API misuses through program analysis and code
+mining. I was fortunate to be [the first author of two
+papers](https://scholar.google.com/citations?user=dpV2oe0AAAAJ) published at
+software engineering conferences (ICSE 2021 and ICSME 2022).
