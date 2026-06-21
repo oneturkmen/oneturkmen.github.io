@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Welcome!</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 18px;
+      line-height: 1.55;
+      color: #111;
+      background: #fff;
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 48px auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 48px;
+    }
+
+    nav {
+      font-size: 16px;
+    }
+
+    nav .site-name {
+      margin-bottom: 18px;
+      font-weight: normal;
+      font-size: 32px;
+      line-height: 1.2;
+    }
+
+    nav a {
+      display: block;
+      margin-bottom: 6px;
+      color: #111;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      max-width: 620px;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: 34px;
+      font-weight: normal;
+      line-height: 1.2;
+    }
+
+    p {
+      margin: 0 0 24px;
+      font-size: 21px;
+    }
+
+    .elsewhere {
+      margin-top: 32px;
+      font-size: 18px;
+    }
+
+    .elsewhere a {
+      color: #111;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        margin-top: 32px;
+      }
+
+      nav a {
+        display: inline-block;
+        margin-right: 14px;
+      }
+    }
+
+    .maintenance-note {
+      margin-top: 28px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 16px;
+      color: #444;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+     
+    .wrench {
+      display: inline-block;
+      animation: wrench-wiggle 1.4s ease-in-out infinite;
+    }
+     
+    .typing {
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 2px solid #444;
+      width: 0;
+      animation:
+        typing 3.2s steps(21, end) infinite,
+        blink 0.8s step-end infinite;
+    }
+    
+    @keyframes typing {
+      0% {
+        width: 0;
+      }
+    
+      55% {
+        width: 21ch;
+      }
+    
+      80% {
+        width: 21ch;
+      }
+    
+      100% {
+        width: 0;
+      }
+    }
+    
+    @keyframes blink {
+      50% {
+        border-color: transparent;
+      }
+    }
+    
+    @keyframes wrench-wiggle {
+      0%, 100% {
+        transform: rotate(0deg);
+      }
+    
+      25% {
+        transform: rotate(-10deg);
+      }
+    
+      50% {
+        transform: rotate(12deg);
+      }
+    
+      75% {
+        transform: rotate(-6deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <nav aria-label="Main navigation">
+      <div class="site-name">Batyr Nuryyev</div>
+      <a href="https://github.com/oneturkmen">GitHub</a>
+      <a href="https://www.linkedin.com/in/oneturkmen/">LinkedIn</a>
+    </nav>
+
+    <main>
+      <h1>Welcome!</h1>
+
+      <p>
+        This website is currently under maintenance. Please check back soon.
+      </p>
+
+      <div class="maintenance-note" aria-label="Maintenance animation">
+	      <span class="wrench">🔧</span>
+	      <span class="typing">editing homepage.html</span>
+      </div>
+
+      <div class="elsewhere">
+        Elsewhere:
+        <a href="https://github.com/oneturkmen">GitHub</a>;
+        <a href="https://www.linkedin.com/in/oneturkmen">LinkedIn</a>.
+      </div>
+    </main>
+  </div>
+</body>
+</html>
